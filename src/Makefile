@@ -140,7 +140,7 @@ CFLAGS = -g -O2 -D_REENTRANT -D_THREAD_SAFE -Wall -W -Wno-unused-parameter -Wagg
 CPP = gcc -E
 CPPFLAGS =  -I/usr/local/include -DENABLE_DOWNLOADS -DCURL_STATICLIB
 CURL_CFLAGS =  -I/mingw64/include
-CURL_LIBS = 
+CURL_LIBS = -lcurl
 CXX = g++
 CXXDEPMODE = depmode=gcc3
 CXXFLAGS = -g -O2 -DENABLE_NATIVE_DIALOGS -Wall -W -Wno-unused-parameter -fno-rtti -fno-exceptions
@@ -171,7 +171,7 @@ LIBPNG_CFLAGS = -I/mingw64/include/libpng16
 LIBPNG_LIBS = -L/mingw64/lib -lpng16
 LIBPTHREAD_LDFLAGS = 
 LIBPTHREAD_LIBS = 
-LIBS =  -lws2_32 -lcurl
+LIBS =  -lws2_32 -lcurl -lssl -lcrypto
 LIBSSL_LIBS = 
 LIBZ_LIBS = -lz
 LTLIBOBJS = 
