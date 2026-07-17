@@ -1,0 +1,1 @@
+dns_alt.o: dns_alt.c

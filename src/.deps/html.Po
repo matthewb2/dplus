@@ -1,0 +1,156 @@
+html.o: html.cc D:/msys64_20251213/mingw64/include/ctype.h \
+ D:/msys64_20251213/mingw64/include/corecrt_wctype.h \
+ D:/msys64_20251213/mingw64/include/corecrt.h \
+ D:/msys64_20251213/mingw64/include/_mingw.h \
+ D:/msys64_20251213/mingw64/include/_mingw_mac.h \
+ D:/msys64_20251213/mingw64/include/_mingw_secapi.h \
+ D:/msys64_20251213/mingw64/include/vadefs.h \
+ D:/msys64_20251213/mingw64/include/sdks/_mingw_ddk.h \
+ D:/msys64_20251213/mingw64/include/string.h \
+ D:/msys64_20251213/mingw64/include/crtdefs.h \
+ D:/msys64_20251213/mingw64/include/sec_api/string_s.h \
+ D:/msys64_20251213/mingw64/include/c++/16.1.0/stdlib.h \
+ D:/msys64_20251213/mingw64/include/c++/16.1.0/cstdlib \
+ D:/msys64_20251213/mingw64/include/c++/16.1.0/x86_64-w64-mingw32/bits/c++config.h \
+ D:/msys64_20251213/mingw64/include/c++/16.1.0/x86_64-w64-mingw32/bits/os_defines.h \
+ D:/msys64_20251213/mingw64/include/c++/16.1.0/x86_64-w64-mingw32/bits/cpu_defines.h \
+ D:/msys64_20251213/mingw64/include/stdlib.h \
+ D:/msys64_20251213/mingw64/include/corecrt_wstdlib.h \
+ D:/msys64_20251213/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/limits.h \
+ D:/msys64_20251213/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/syslimits.h \
+ D:/msys64_20251213/mingw64/include/limits.h \
+ D:/msys64_20251213/mingw64/include/sec_api/stdlib_s.h \
+ D:/msys64_20251213/mingw64/include/malloc.h \
+ D:/msys64_20251213/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/mm_malloc.h \
+ D:/msys64_20251213/mingw64/include/errno.h \
+ D:/msys64_20251213/mingw64/include/c++/16.1.0/bits/std_abs.h \
+ D:/msys64_20251213/mingw64/include/stdio.h \
+ D:/msys64_20251213/mingw64/include/corecrt_stdio_config.h \
+ D:/msys64_20251213/mingw64/include/_mingw_off_t.h \
+ D:/msys64_20251213/mingw64/include/swprintf.inl \
+ D:/msys64_20251213/mingw64/include/sec_api/stdio_s.h bw.h url.h \
+ ../d_size.h ../config.h \
+ D:/msys64_20251213/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/stdint.h \
+ D:/msys64_20251213/mingw64/include/stdint.h \
+ D:/msys64_20251213/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/stddef.h \
+ D:/msys64_20251213/mingw64/include/stddef.h ../dlib/dlib.h \
+ D:/msys64_20251213/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/stdarg.h \
+ D:/msys64_20251213/mingw64/include/stdarg.h \
+ D:/msys64_20251213/mingw64/include/_mingw_stdarg.h \
+ D:/msys64_20251213/mingw64/include/strings.h msg.h prefs.h binaryconst.h \
+ colors.h ../config.h utf8.hh misc.h uicmd.hh history.h menu.hh capi.h \
+ cache.h chain.h web.hh image.hh bitvec.h html.hh html_common.hh \
+ ../lout/misc.hh D:/msys64_20251213/mingw64/include/assert.h \
+ ../dw/core.hh ../dw/../lout/object.hh ../dw/../lout/misc.hh \
+ ../dw/../lout/container.hh ../dw/../lout/object.hh \
+ ../dw/../lout/signal.hh ../dw/../lout/container.hh ../dw/types.hh \
+ ../dw/events.hh ../dw/imgbuf.hh ../dw/style.hh ../dw/view.hh \
+ ../dw/platform.hh ../dw/iterator.hh ../dw/findtext.hh ../dw/selection.hh \
+ ../dw/layout.hh ../dw/widget.hh ../dw/../lout/identity.hh \
+ ../dw/../lout/signal.hh ../dw/ui.hh ../dw/image.hh ../dw/core.hh \
+ ../dw/style.hh form.hh styleengine.hh doctree.hh css.hh cssparser.hh \
+ table.hh ../dw/textblock.hh ../dw/../lout/misc.hh ../dw/bullet.hh \
+ ../dw/listitem.hh ../dw/alignedtextblock.hh ../dw/textblock.hh \
+ ../dw/image.hh ../dw/ruler.hh
+D:/msys64_20251213/mingw64/include/ctype.h:
+D:/msys64_20251213/mingw64/include/corecrt_wctype.h:
+D:/msys64_20251213/mingw64/include/corecrt.h:
+D:/msys64_20251213/mingw64/include/_mingw.h:
+D:/msys64_20251213/mingw64/include/_mingw_mac.h:
+D:/msys64_20251213/mingw64/include/_mingw_secapi.h:
+D:/msys64_20251213/mingw64/include/vadefs.h:
+D:/msys64_20251213/mingw64/include/sdks/_mingw_ddk.h:
+D:/msys64_20251213/mingw64/include/string.h:
+D:/msys64_20251213/mingw64/include/crtdefs.h:
+D:/msys64_20251213/mingw64/include/sec_api/string_s.h:
+D:/msys64_20251213/mingw64/include/c++/16.1.0/stdlib.h:
+D:/msys64_20251213/mingw64/include/c++/16.1.0/cstdlib:
+D:/msys64_20251213/mingw64/include/c++/16.1.0/x86_64-w64-mingw32/bits/c++config.h:
+D:/msys64_20251213/mingw64/include/c++/16.1.0/x86_64-w64-mingw32/bits/os_defines.h:
+D:/msys64_20251213/mingw64/include/c++/16.1.0/x86_64-w64-mingw32/bits/cpu_defines.h:
+D:/msys64_20251213/mingw64/include/stdlib.h:
+D:/msys64_20251213/mingw64/include/corecrt_wstdlib.h:
+D:/msys64_20251213/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/limits.h:
+D:/msys64_20251213/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/syslimits.h:
+D:/msys64_20251213/mingw64/include/limits.h:
+D:/msys64_20251213/mingw64/include/sec_api/stdlib_s.h:
+D:/msys64_20251213/mingw64/include/malloc.h:
+D:/msys64_20251213/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/mm_malloc.h:
+D:/msys64_20251213/mingw64/include/errno.h:
+D:/msys64_20251213/mingw64/include/c++/16.1.0/bits/std_abs.h:
+D:/msys64_20251213/mingw64/include/stdio.h:
+D:/msys64_20251213/mingw64/include/corecrt_stdio_config.h:
+D:/msys64_20251213/mingw64/include/_mingw_off_t.h:
+D:/msys64_20251213/mingw64/include/swprintf.inl:
+D:/msys64_20251213/mingw64/include/sec_api/stdio_s.h:
+bw.h:
+url.h:
+../d_size.h:
+../config.h:
+D:/msys64_20251213/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/stdint.h:
+D:/msys64_20251213/mingw64/include/stdint.h:
+D:/msys64_20251213/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/stddef.h:
+D:/msys64_20251213/mingw64/include/stddef.h:
+../dlib/dlib.h:
+D:/msys64_20251213/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/stdarg.h:
+D:/msys64_20251213/mingw64/include/stdarg.h:
+D:/msys64_20251213/mingw64/include/_mingw_stdarg.h:
+D:/msys64_20251213/mingw64/include/strings.h:
+msg.h:
+prefs.h:
+binaryconst.h:
+colors.h:
+../config.h:
+utf8.hh:
+misc.h:
+uicmd.hh:
+history.h:
+menu.hh:
+capi.h:
+cache.h:
+chain.h:
+web.hh:
+image.hh:
+bitvec.h:
+html.hh:
+html_common.hh:
+../lout/misc.hh:
+D:/msys64_20251213/mingw64/include/assert.h:
+../dw/core.hh:
+../dw/../lout/object.hh:
+../dw/../lout/misc.hh:
+../dw/../lout/container.hh:
+../dw/../lout/object.hh:
+../dw/../lout/signal.hh:
+../dw/../lout/container.hh:
+../dw/types.hh:
+../dw/events.hh:
+../dw/imgbuf.hh:
+../dw/style.hh:
+../dw/view.hh:
+../dw/platform.hh:
+../dw/iterator.hh:
+../dw/findtext.hh:
+../dw/selection.hh:
+../dw/layout.hh:
+../dw/widget.hh:
+../dw/../lout/identity.hh:
+../dw/../lout/signal.hh:
+../dw/ui.hh:
+../dw/image.hh:
+../dw/core.hh:
+../dw/style.hh:
+form.hh:
+styleengine.hh:
+doctree.hh:
+css.hh:
+cssparser.hh:
+table.hh:
+../dw/textblock.hh:
+../dw/../lout/misc.hh:
+../dw/bullet.hh:
+../dw/listitem.hh:
+../dw/alignedtextblock.hh:
+../dw/textblock.hh:
+../dw/image.hh:
+../dw/ruler.hh:

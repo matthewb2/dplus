@@ -1,0 +1,2 @@
+about.o: about.c ../../config.h
+../../config.h:

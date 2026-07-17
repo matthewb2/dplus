@@ -1,0 +1,72 @@
+nav.o: nav.c D:/msys64_20251213/mingw64/include/stdio.h \
+ D:/msys64_20251213/mingw64/include/corecrt_stdio_config.h \
+ D:/msys64_20251213/mingw64/include/corecrt.h \
+ D:/msys64_20251213/mingw64/include/_mingw.h \
+ D:/msys64_20251213/mingw64/include/_mingw_mac.h \
+ D:/msys64_20251213/mingw64/include/_mingw_secapi.h \
+ D:/msys64_20251213/mingw64/include/vadefs.h \
+ D:/msys64_20251213/mingw64/include/sdks/_mingw_ddk.h \
+ D:/msys64_20251213/mingw64/include/_mingw_off_t.h \
+ D:/msys64_20251213/mingw64/include/swprintf.inl \
+ D:/msys64_20251213/mingw64/include/sec_api/stdio_s.h \
+ D:/msys64_20251213/mingw64/include/sys/stat.h \
+ D:/msys64_20251213/mingw64/include/crtdefs.h \
+ D:/msys64_20251213/mingw64/include/io.h \
+ D:/msys64_20251213/mingw64/include/string.h \
+ D:/msys64_20251213/mingw64/include/sec_api/string_s.h \
+ D:/msys64_20251213/mingw64/include/sys/types.h \
+ D:/msys64_20251213/mingw64/include/_mingw_stat64.h msg.h prefs.h url.h \
+ ../d_size.h ../config.h \
+ D:/msys64_20251213/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/stdint.h \
+ D:/msys64_20251213/mingw64/include/stdint.h \
+ D:/msys64_20251213/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/stddef.h \
+ D:/msys64_20251213/mingw64/include/stddef.h ../dlib/dlib.h \
+ D:/msys64_20251213/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/stdarg.h \
+ D:/msys64_20251213/mingw64/include/stdarg.h \
+ D:/msys64_20251213/mingw64/include/_mingw_stdarg.h \
+ D:/msys64_20251213/mingw64/include/strings.h nav.h bw.h history.h web.hh \
+ cache.h chain.h image.hh bitvec.h uicmd.hh dialog.hh capi.h timeout.hh
+D:/msys64_20251213/mingw64/include/stdio.h:
+D:/msys64_20251213/mingw64/include/corecrt_stdio_config.h:
+D:/msys64_20251213/mingw64/include/corecrt.h:
+D:/msys64_20251213/mingw64/include/_mingw.h:
+D:/msys64_20251213/mingw64/include/_mingw_mac.h:
+D:/msys64_20251213/mingw64/include/_mingw_secapi.h:
+D:/msys64_20251213/mingw64/include/vadefs.h:
+D:/msys64_20251213/mingw64/include/sdks/_mingw_ddk.h:
+D:/msys64_20251213/mingw64/include/_mingw_off_t.h:
+D:/msys64_20251213/mingw64/include/swprintf.inl:
+D:/msys64_20251213/mingw64/include/sec_api/stdio_s.h:
+D:/msys64_20251213/mingw64/include/sys/stat.h:
+D:/msys64_20251213/mingw64/include/crtdefs.h:
+D:/msys64_20251213/mingw64/include/io.h:
+D:/msys64_20251213/mingw64/include/string.h:
+D:/msys64_20251213/mingw64/include/sec_api/string_s.h:
+D:/msys64_20251213/mingw64/include/sys/types.h:
+D:/msys64_20251213/mingw64/include/_mingw_stat64.h:
+msg.h:
+prefs.h:
+url.h:
+../d_size.h:
+../config.h:
+D:/msys64_20251213/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/stdint.h:
+D:/msys64_20251213/mingw64/include/stdint.h:
+D:/msys64_20251213/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/stddef.h:
+D:/msys64_20251213/mingw64/include/stddef.h:
+../dlib/dlib.h:
+D:/msys64_20251213/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/stdarg.h:
+D:/msys64_20251213/mingw64/include/stdarg.h:
+D:/msys64_20251213/mingw64/include/_mingw_stdarg.h:
+D:/msys64_20251213/mingw64/include/strings.h:
+nav.h:
+bw.h:
+history.h:
+web.hh:
+cache.h:
+chain.h:
+image.hh:
+bitvec.h:
+uicmd.hh:
+dialog.hh:
+capi.h:
+timeout.hh:
