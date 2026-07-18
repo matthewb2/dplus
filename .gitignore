@@ -1,3 +1,4 @@
-.o
-.Po
+*.o
+*.Po
 dist
+src/*.o
