@@ -530,16 +530,6 @@ fi
 
 AM_CONDITIONAL(BUILD_TEST, [test x$enable_test = xyes])
 
-dnl ---------------------------
-dnl Link to libunicows on Win32
-dnl ---------------------------
-dnl
-case $target in
-   *-*-mingw*)
-      LIBS="$LIBS -lunicows"
-      ;;
-esac
-
 dnl --------------------
 dnl Command line options
 dnl --------------------

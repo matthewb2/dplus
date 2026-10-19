@@ -5,6 +5,8 @@ AM_CPPFLAGS= \
 AM_CFLAGS = @LIBPNG_CFLAGS@
 AM_CXXFLAGS = @LIBPNG_CFLAGS@ @CURL_CFLAGS@ @LIBFLTK_CXXFLAGS@
 
+AM_LDFLAGS = -lcurl -lssl -lcrypto
+
 SUBDIRS = IO
 
 bin_PROGRAMS = dplus
@@ -18,8 +20,8 @@ dplus_LDADD = \
 	$(top_builddir)/widgets/libDP-widgets.a \
 	$(top_builddir)/lout/liblout.a \
 	@LIBJPEG_LIBS@ @LIBPNG_LIBS@ @LIBFLTK_LIBS@ @LIBZ_LIBS@ \
-	@LIBICONV_LIBS@ @LIBPTHREAD_LIBS@ @CURL_LIBS@
-
+	@LIBICONV_LIBS@ @LIBPTHREAD_LIBS@ @CURL_LIBS@ $(AM_LDFLAGS)
+	
 dplus_SOURCES = \
 	dplus.cc \
 	unicows.h \

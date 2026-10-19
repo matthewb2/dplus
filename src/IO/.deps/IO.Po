@@ -6,32 +6,31 @@ IO.o: IO.c D:/msys64_20251213/mingw64/include/errno.h \
  D:/msys64_20251213/mingw64/include/_mingw_secapi.h \
  D:/msys64_20251213/mingw64/include/vadefs.h \
  D:/msys64_20251213/mingw64/include/sdks/_mingw_ddk.h \
- D:/msys64_20251213/mingw64/include/unistd.h \
- D:/msys64_20251213/mingw64/include/io.h \
- D:/msys64_20251213/mingw64/include/string.h \
- D:/msys64_20251213/mingw64/include/sec_api/string_s.h \
- D:/msys64_20251213/mingw64/include/_mingw_off_t.h \
- D:/msys64_20251213/mingw64/include/process.h \
- D:/msys64_20251213/mingw64/include/corecrt_startup.h \
- D:/msys64_20251213/mingw64/include/sys/types.h \
- D:/msys64_20251213/mingw64/include/getopt.h \
- D:/msys64_20251213/mingw64/include/pthread_unistd.h ../msg.h \
- D:/msys64_20251213/mingw64/include/stdio.h \
- D:/msys64_20251213/mingw64/include/corecrt_stdio_config.h \
- D:/msys64_20251213/mingw64/include/swprintf.inl \
- D:/msys64_20251213/mingw64/include/sec_api/stdio_s.h ../prefs.h ../url.h \
- ../../d_size.h ../../config.h \
+ D:/msys64_20251213/mingw64/include/unistd.h io.h ../../d_size.h \
+ ../../config.h \
  D:/msys64_20251213/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/stdint.h \
  D:/msys64_20251213/mingw64/include/stdint.h \
  D:/msys64_20251213/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/stddef.h \
  D:/msys64_20251213/mingw64/include/stddef.h ../../dlib/dlib.h \
+ D:/msys64_20251213/mingw64/include/stdio.h \
+ D:/msys64_20251213/mingw64/include/corecrt_stdio_config.h \
+ D:/msys64_20251213/mingw64/include/_mingw_off_t.h \
+ D:/msys64_20251213/mingw64/include/swprintf.inl \
+ D:/msys64_20251213/mingw64/include/sec_api/stdio_s.h \
  D:/msys64_20251213/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/stdarg.h \
  D:/msys64_20251213/mingw64/include/stdarg.h \
  D:/msys64_20251213/mingw64/include/_mingw_stdarg.h \
- D:/msys64_20251213/mingw64/include/strings.h ../chain.h ../klist.h IO.h \
- ../../dlib/dlib.h iowatch.hh ../../dlib/dfcntl.h \
- D:/msys64_20251213/mingw64/include/fcntl.h ../../dlib/dsock.h \
- D:/msys64_20251213/mingw64/include/winsock2.h \
+ D:/msys64_20251213/mingw64/include/string.h \
+ D:/msys64_20251213/mingw64/include/sec_api/string_s.h \
+ D:/msys64_20251213/mingw64/include/strings.h ../chain.h \
+ D:/msys64_20251213/mingw64/include/process.h \
+ D:/msys64_20251213/mingw64/include/corecrt_startup.h \
+ D:/msys64_20251213/mingw64/include/sys/types.h \
+ D:/msys64_20251213/mingw64/include/getopt.h \
+ D:/msys64_20251213/mingw64/include/pthread_unistd.h ../msg.h ../prefs.h \
+ ../url.h ../../dlib/dlib.h ../chain.h ../klist.h IO.h iowatch.hh \
+ ../../dlib/dfcntl.h D:/msys64_20251213/mingw64/include/fcntl.h \
+ ../../dlib/dsock.h D:/msys64_20251213/mingw64/include/winsock2.h \
  D:/msys64_20251213/mingw64/include/_mingw_unicode.h \
  D:/msys64_20251213/mingw64/include/windows.h \
  D:/msys64_20251213/mingw64/include/sdkddkver.h \
@@ -256,22 +255,7 @@ D:/msys64_20251213/mingw64/include/_mingw_secapi.h:
 D:/msys64_20251213/mingw64/include/vadefs.h:
 D:/msys64_20251213/mingw64/include/sdks/_mingw_ddk.h:
 D:/msys64_20251213/mingw64/include/unistd.h:
-D:/msys64_20251213/mingw64/include/io.h:
-D:/msys64_20251213/mingw64/include/string.h:
-D:/msys64_20251213/mingw64/include/sec_api/string_s.h:
-D:/msys64_20251213/mingw64/include/_mingw_off_t.h:
-D:/msys64_20251213/mingw64/include/process.h:
-D:/msys64_20251213/mingw64/include/corecrt_startup.h:
-D:/msys64_20251213/mingw64/include/sys/types.h:
-D:/msys64_20251213/mingw64/include/getopt.h:
-D:/msys64_20251213/mingw64/include/pthread_unistd.h:
-../msg.h:
-D:/msys64_20251213/mingw64/include/stdio.h:
-D:/msys64_20251213/mingw64/include/corecrt_stdio_config.h:
-D:/msys64_20251213/mingw64/include/swprintf.inl:
-D:/msys64_20251213/mingw64/include/sec_api/stdio_s.h:
-../prefs.h:
-../url.h:
+io.h:
 ../../d_size.h:
 ../../config.h:
 D:/msys64_20251213/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/stdint.h:
@@ -279,14 +263,30 @@ D:/msys64_20251213/mingw64/include/stdint.h:
 D:/msys64_20251213/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/stddef.h:
 D:/msys64_20251213/mingw64/include/stddef.h:
 ../../dlib/dlib.h:
+D:/msys64_20251213/mingw64/include/stdio.h:
+D:/msys64_20251213/mingw64/include/corecrt_stdio_config.h:
+D:/msys64_20251213/mingw64/include/_mingw_off_t.h:
+D:/msys64_20251213/mingw64/include/swprintf.inl:
+D:/msys64_20251213/mingw64/include/sec_api/stdio_s.h:
 D:/msys64_20251213/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/stdarg.h:
 D:/msys64_20251213/mingw64/include/stdarg.h:
 D:/msys64_20251213/mingw64/include/_mingw_stdarg.h:
+D:/msys64_20251213/mingw64/include/string.h:
+D:/msys64_20251213/mingw64/include/sec_api/string_s.h:
 D:/msys64_20251213/mingw64/include/strings.h:
+../chain.h:
+D:/msys64_20251213/mingw64/include/process.h:
+D:/msys64_20251213/mingw64/include/corecrt_startup.h:
+D:/msys64_20251213/mingw64/include/sys/types.h:
+D:/msys64_20251213/mingw64/include/getopt.h:
+D:/msys64_20251213/mingw64/include/pthread_unistd.h:
+../msg.h:
+../prefs.h:
+../url.h:
+../../dlib/dlib.h:
 ../chain.h:
 ../klist.h:
 IO.h:
-../../dlib/dlib.h:
 iowatch.hh:
 ../../dlib/dfcntl.h:
 D:/msys64_20251213/mingw64/include/fcntl.h:
