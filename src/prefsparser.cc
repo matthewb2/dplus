@@ -81,6 +81,7 @@ const SymNode_t symbols[] = {
    { "no_proxy", &prefs.no_proxy, PREFS_STRING },
    { "panel_size", &prefs.panel_size, PREFS_PANEL_SIZE },
    { "parse_embedded_css", &prefs.parse_embedded_css, PREFS_BOOL },
+   { "parse_embedded_js", &prefs.parse_embedded_js, PREFS_BOOL },
    { "search_url", &prefs.search_urls, PREFS_STRINGS },
    { "show_back", &prefs.show_back, PREFS_BOOL },
    { "show_bookmarks", &prefs.show_bookmarks, PREFS_BOOL },

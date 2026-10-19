@@ -15,6 +15,8 @@
 
 #include "styleengine.hh"
 
+#include "js_engine.hh"
+
 /*
  * Macros
  */
@@ -169,6 +171,7 @@ public:  //BUG: for now everything is public
 
    Dstr *Stash;
    bool StashSpace;
+   bool ScriptHasSrc;     /* current SCRIPT element loads an external file */
 
    int pre_column;        /* current column, used in PRE tags with tabs */
    bool PreFirstChar;     /* used to skip the first CR or CRLF in PRE tags */
@@ -197,6 +200,8 @@ public:  //BUG: for now everything is public
    lout::misc::SimpleVector<DilloHtmlImage*> *images;
    dw::ImageMapsList maps;
 
+   DilloJS *js;
+
 private:
    void freeParseData();
    void initDw();  /* Used by the constructor */
@@ -215,6 +220,8 @@ public:
    bool_t unloadedImages();
    void loadImages (const DilloUrl *pattern);
    void addCssUrl(const DilloUrl *url);
+   void injectHtml(const char *buf, int len);
+   void evalJs(const char *code, size_t len, const char *filename = "<script>");
 };
 
 /*

@@ -76,6 +76,7 @@ struct _DilloPrefs {
    bool_t load_images;
    bool_t load_stylesheets;
    bool_t parse_embedded_css;
+   bool_t parse_embedded_js;
    int filter_auto_requests;
    int32_t buffered_drawing;
    char *font_serif;

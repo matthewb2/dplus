@@ -2,10 +2,10 @@ AM_CPPFLAGS= \
 	-I$(top_srcdir) \
 	-DDILLO_SYSCONF='"$(sysconfdir)/"' \
 	@LIBJPEG_CPPFLAGS@
-AM_CFLAGS = @LIBPNG_CFLAGS@
-AM_CXXFLAGS = @LIBPNG_CFLAGS@ @CURL_CFLAGS@ @LIBFLTK_CXXFLAGS@
+AM_CFLAGS = @LIBPNG_CFLAGS@ -I$(top_srcdir)/src -I$(top_srcdir)/src/deps/quickjs
+AM_CXXFLAGS = @LIBPNG_CFLAGS@ @CURL_CFLAGS@ @LIBFLTK_CXXFLAGS@ -I$(top_srcdir)/src -I$(top_srcdir)/src/deps/quickjs
 
-AM_LDFLAGS = -lcurl -lssl -lcrypto
+AM_LDFLAGS = -lcurl -lssl -lcrypto -lm
 
 SUBDIRS = IO
 
@@ -131,7 +131,15 @@ dplus_SOURCES = \
 	print.cc \
 	print.hh \
 	xembed.cc \
-	xembed.hh
+	xembed.hh \
+	js_engine.cc \
+	js_engine.hh \
+	deps/quickjs/quickjs.c \
+	deps/quickjs/quickjs-libc.c \
+	deps/quickjs/cutils.c \
+	deps/quickjs/dtoa.c \
+	deps/quickjs/libregexp.c \
+	deps/quickjs/libunicode.c
 
 if HAVE_WIN32RES
 dplus_LDADD += dplus.res
@@ -142,4 +150,18 @@ dplus.res: dplus.rc dplus.ico
 	$(RC) -O coff -o $@ $<
 endif
 
-EXTRA_DIST = chg srch
+EXTRA_DIST = chg srch \
+	deps/quickjs/quickjs.h \
+	deps/quickjs/quickjs-atom.h \
+	deps/quickjs/quickjs-opcode.h \
+	deps/quickjs/quickjs-c-atomics.h \
+	deps/quickjs/cutils.h \
+	deps/quickjs/dtoa.h \
+	deps/quickjs/libregexp.h \
+	deps/quickjs/libregexp-opcode.h \
+	deps/quickjs/libunicode.h \
+	deps/quickjs/libunicode-table.h \
+	deps/quickjs/list.h \
+	deps/quickjs/builtin-array-fromasync.h \
+	deps/quickjs/quickjs-libc.h \
+	deps/quickjs/LICENSE

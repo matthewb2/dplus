@@ -456,6 +456,10 @@ DilloHtml::DilloHtml(BrowserWindow *p_bw, const DilloUrl *url,
 
    Stash = dStr_new("");
    StashSpace = false;
+   ScriptHasSrc = false;
+
+   js = new DilloJS(this);
+   js->init();
 
    pre_column = 0;
    PreFirstChar = false;
@@ -599,6 +603,8 @@ void DilloHtml::freeParseData()
    dStr_free(attr_data, TRUE);
    dFree(content_type);
    dFree(charset);
+   delete js;
+   js = NULL;
 }
 
 /*
@@ -691,6 +697,21 @@ void DilloHtml::addCssUrl(const DilloUrl *url)
    int nu = cssUrls->size();
    cssUrls->increase();
    cssUrls->set(nu, a_Url_dup(url));
+}
+
+void DilloHtml::injectHtml(const char *buf, int len)
+{
+   if (!buf || len <= 0)
+      return;
+   Html_write_raw(this, (char*)buf, len, 0);
+}
+
+void DilloHtml::evalJs(const char *code, size_t len, const char *filename)
+{
+   if (!js)
+      return;
+   js->eval(code, len, filename);
+   js->flushWrites();
 }
 
 bool DilloHtml::HtmlLinkReceiver::enter (Widget *widget, int link, int img,
@@ -1674,7 +1695,29 @@ static void Html_tag_close_title(DilloHtml *html, int TagIdx)
  */
 static void Html_tag_open_script(DilloHtml *html, const char *tag, int tagsize)
 {
+   const char *src = a_Html_get_attr(html, tag, tagsize, "src");
+
+   html->ScriptHasSrc = false;
    a_Html_stash_init(html);
+
+   if (src && *src) {
+      html->ScriptHasSrc = true;
+      if (prefs.parse_embedded_js) {
+         DilloUrl *url = a_Html_url_new(html, src, URL_STR(html->base_url), 1);
+         char *data = NULL;
+         int len = 0;
+         if (a_Capi_get_buf(url, &data, &len)) {
+            if (a_Capi_get_flags_with_redirection(url) & CAPI_Completed) {
+               html->evalJs(data, len, src);
+            }
+            a_Capi_unref_buf(url);
+         }
+         a_Url_free(url);
+      }
+   }
+
+   /* The content of a script with "src" must be ignored; VERBATIM simply
+    * swallows it into the stash (which is discarded on close). */
    S_TOP(html)->parse_mode = DILLO_HTML_PARSE_MODE_VERBATIM;
 }
 
@@ -1683,7 +1726,27 @@ static void Html_tag_open_script(DilloHtml *html, const char *tag, int tagsize)
  */
 static void Html_tag_close_script(DilloHtml *html, int TagIdx)
 {
-   /* eventually the stash will be sent to an interpreter for parsing */
+   if (html->ScriptHasSrc) {
+      /* external script already evaluated on open; discard inline content */
+      html->ScriptHasSrc = false;
+      return;
+   }
+   if (!prefs.parse_embedded_js || !html->Stash || html->Stash->len == 0)
+      return;
+
+   /* document.write() outputs HTML that must be parsed in the enclosing
+    * context. The SCRIPT element is still on top of the stack at this point
+    * (the close function runs before it is popped), so temporarily switch
+    * the parse mode to the enclosing element's mode. */
+   int sz = html->stack->size();
+   DilloHtmlParseMode saved = S_TOP(html)->parse_mode;
+   if (sz >= 2)
+      S_TOP(html)->parse_mode = html->stack->getRef(sz - 2)->parse_mode;
+
+   html->evalJs(html->Stash->str, html->Stash->len);
+
+   if (sz >= 2 && S_TOP(html)->parse_mode != DILLO_HTML_PARSE_MODE_PRE)
+      S_TOP(html)->parse_mode = saved;
 }
 
 /*

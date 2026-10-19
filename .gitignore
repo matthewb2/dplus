@@ -2,4 +2,7 @@
 *.Po
 dist
 src/*.o
+src/.deps
 *.exe
+src/IO/*.o
+src/IO/.deps

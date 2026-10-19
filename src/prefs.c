@@ -95,6 +95,7 @@ void a_Prefs_init(void)
    prefs.no_proxy = dStrdup(PREFS_NO_PROXY);
    prefs.panel_size = P_tiny;
    prefs.parse_embedded_css=TRUE;
+   prefs.parse_embedded_js=TRUE;
    prefs.search_urls = dList_new(16);
    prefs.search_url_idx = 0;
    prefs.show_back = TRUE;

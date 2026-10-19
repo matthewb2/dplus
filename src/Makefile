@@ -81,7 +81,9 @@ am_dplus_OBJECTS = dplus.$(OBJEXT) unicows.$(OBJEXT) paths.$(OBJEXT) \
 	dns_alt.$(OBJEXT) gif.$(OBJEXT) jpeg.$(OBJEXT) png.$(OBJEXT) \
 	imgbuf.$(OBJEXT) image.$(OBJEXT) menu.$(OBJEXT) file.$(OBJEXT) \
 	findbar.$(OBJEXT) download.$(OBJEXT) print.$(OBJEXT) \
-	xembed.$(OBJEXT)
+	xembed.$(OBJEXT) js_engine.$(OBJEXT) quickjs.$(OBJEXT) \
+	quickjs-libc.$(OBJEXT) cutils.$(OBJEXT) dtoa.$(OBJEXT) \
+	libregexp.$(OBJEXT) libunicode.$(OBJEXT)
 dplus_OBJECTS = $(am_dplus_OBJECTS)
 am__DEPENDENCIES_1 =
 dplus_DEPENDENCIES = $(top_builddir)/dlib/libDlib.a IO/libDiof.a \
@@ -275,9 +277,9 @@ AM_CPPFLAGS = \
 	-DDILLO_SYSCONF='"$(sysconfdir)/"' \
 	
 
-AM_CFLAGS = -I/mingw64/include/libpng16
-AM_CXXFLAGS = -I/mingw64/include/libpng16  -I/mingw64/include -I/mingw64/include -march=nocona -msahf -mtune=generic -O2 -pipe -Wp,-D_FORTIFY_SOURCE=2 -fstack-protector-strong -Wp,-D__USE_MINGW_ANSI_STDIO=1 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64
-AM_LDFLAGS = -lcurl -lssl -lcrypto
+AM_CFLAGS = -I/mingw64/include/libpng16 -I$(top_srcdir)/src -I$(top_srcdir)/src/deps/quickjs
+AM_CXXFLAGS = -I/mingw64/include/libpng16  -I/mingw64/include -I/mingw64/include -march=nocona -msahf -mtune=generic -O2 -pipe -Wp,-D_FORTIFY_SOURCE=2 -fstack-protector-strong -Wp,-D__USE_MINGW_ANSI_STDIO=1 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -I$(top_srcdir)/src -I$(top_srcdir)/src/deps/quickjs
+AM_LDFLAGS = -lcurl -lssl -lcrypto -lm
 SUBDIRS = IO
 dplus_LDADD = $(top_builddir)/dlib/libDlib.a IO/libDiof.a \
 	$(top_builddir)/dw/libDw-widgets.a \
@@ -396,9 +398,32 @@ dplus_SOURCES = \
 	print.cc \
 	print.hh \
 	xembed.cc \
-	xembed.hh
+	xembed.hh \
+	js_engine.cc \
+	js_engine.hh \
+	deps/quickjs/quickjs.c \
+	deps/quickjs/quickjs-libc.c \
+	deps/quickjs/cutils.c \
+	deps/quickjs/dtoa.c \
+	deps/quickjs/libregexp.c \
+	deps/quickjs/libunicode.c
 
-EXTRA_DIST = chg srch
+EXTRA_DIST = chg srch \
+	deps/quickjs/quickjs.h \
+	deps/quickjs/quickjs-atom.h \
+	deps/quickjs/quickjs-opcode.h \
+	deps/quickjs/quickjs-c-atomics.h \
+	deps/quickjs/cutils.h \
+	deps/quickjs/dtoa.h \
+	deps/quickjs/libregexp.h \
+	deps/quickjs/libregexp-opcode.h \
+	deps/quickjs/libunicode.h \
+	deps/quickjs/libunicode-table.h \
+	deps/quickjs/list.h \
+	deps/quickjs/builtin-array-fromasync.h \
+	deps/quickjs/quickjs-libc.h \
+	deps/quickjs/LICENSE
+
 all: all-recursive
 
 .SUFFIXES:
@@ -495,6 +520,7 @@ include ./$(DEPDIR)/colors.Po
 include ./$(DEPDIR)/cookies.Po
 include ./$(DEPDIR)/css.Po
 include ./$(DEPDIR)/cssparser.Po
+include ./$(DEPDIR)/cutils.Po
 include ./$(DEPDIR)/decode.Po
 include ./$(DEPDIR)/dialog.Po
 include ./$(DEPDIR)/dicache.Po
@@ -502,6 +528,7 @@ include ./$(DEPDIR)/dns.Po
 include ./$(DEPDIR)/dns_alt.Po
 include ./$(DEPDIR)/download.Po
 include ./$(DEPDIR)/dplus.Po
+include ./$(DEPDIR)/dtoa.Po
 include ./$(DEPDIR)/file.Po
 include ./$(DEPDIR)/findbar.Po
 include ./$(DEPDIR)/form.Po
@@ -513,8 +540,11 @@ include ./$(DEPDIR)/image.Po
 include ./$(DEPDIR)/imgbuf.Po
 include ./$(DEPDIR)/import.Po
 include ./$(DEPDIR)/jpeg.Po
+include ./$(DEPDIR)/js_engine.Po
 include ./$(DEPDIR)/keys.Po
 include ./$(DEPDIR)/klist.Po
+include ./$(DEPDIR)/libregexp.Po
+include ./$(DEPDIR)/libunicode.Po
 include ./$(DEPDIR)/menu.Po
 include ./$(DEPDIR)/misc.Po
 include ./$(DEPDIR)/nav.Po
@@ -525,6 +555,8 @@ include ./$(DEPDIR)/prefs.Po
 include ./$(DEPDIR)/prefsparser.Po
 include ./$(DEPDIR)/prefsui.Po
 include ./$(DEPDIR)/print.Po
+include ./$(DEPDIR)/quickjs-libc.Po
+include ./$(DEPDIR)/quickjs.Po
 include ./$(DEPDIR)/styleengine.Po
 include ./$(DEPDIR)/table.Po
 include ./$(DEPDIR)/timeout.Po
@@ -549,6 +581,90 @@ include ./$(DEPDIR)/xembed.Po
 #	source='$<' object='$@' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
 #	$(COMPILE) -c `$(CYGPATH_W) '$<'`
+
+quickjs.o: deps/quickjs/quickjs.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT quickjs.o -MD -MP -MF $(DEPDIR)/quickjs.Tpo -c -o quickjs.o `test -f 'deps/quickjs/quickjs.c' || echo '$(srcdir)/'`deps/quickjs/quickjs.c
+	$(am__mv) $(DEPDIR)/quickjs.Tpo $(DEPDIR)/quickjs.Po
+#	source='deps/quickjs/quickjs.c' object='quickjs.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o quickjs.o `test -f 'deps/quickjs/quickjs.c' || echo '$(srcdir)/'`deps/quickjs/quickjs.c
+
+quickjs.obj: deps/quickjs/quickjs.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT quickjs.obj -MD -MP -MF $(DEPDIR)/quickjs.Tpo -c -o quickjs.obj `if test -f 'deps/quickjs/quickjs.c'; then $(CYGPATH_W) 'deps/quickjs/quickjs.c'; else $(CYGPATH_W) '$(srcdir)/deps/quickjs/quickjs.c'; fi`
+	$(am__mv) $(DEPDIR)/quickjs.Tpo $(DEPDIR)/quickjs.Po
+#	source='deps/quickjs/quickjs.c' object='quickjs.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o quickjs.obj `if test -f 'deps/quickjs/quickjs.c'; then $(CYGPATH_W) 'deps/quickjs/quickjs.c'; else $(CYGPATH_W) '$(srcdir)/deps/quickjs/quickjs.c'; fi`
+
+quickjs-libc.o: deps/quickjs/quickjs-libc.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT quickjs-libc.o -MD -MP -MF $(DEPDIR)/quickjs-libc.Tpo -c -o quickjs-libc.o `test -f 'deps/quickjs/quickjs-libc.c' || echo '$(srcdir)/'`deps/quickjs/quickjs-libc.c
+	$(am__mv) $(DEPDIR)/quickjs-libc.Tpo $(DEPDIR)/quickjs-libc.Po
+#	source='deps/quickjs/quickjs-libc.c' object='quickjs-libc.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o quickjs-libc.o `test -f 'deps/quickjs/quickjs-libc.c' || echo '$(srcdir)/'`deps/quickjs/quickjs-libc.c
+
+quickjs-libc.obj: deps/quickjs/quickjs-libc.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT quickjs-libc.obj -MD -MP -MF $(DEPDIR)/quickjs-libc.Tpo -c -o quickjs-libc.obj `if test -f 'deps/quickjs/quickjs-libc.c'; then $(CYGPATH_W) 'deps/quickjs/quickjs-libc.c'; else $(CYGPATH_W) '$(srcdir)/deps/quickjs/quickjs-libc.c'; fi`
+	$(am__mv) $(DEPDIR)/quickjs-libc.Tpo $(DEPDIR)/quickjs-libc.Po
+#	source='deps/quickjs/quickjs-libc.c' object='quickjs-libc.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o quickjs-libc.obj `if test -f 'deps/quickjs/quickjs-libc.c'; then $(CYGPATH_W) 'deps/quickjs/quickjs-libc.c'; else $(CYGPATH_W) '$(srcdir)/deps/quickjs/quickjs-libc.c'; fi`
+
+cutils.o: deps/quickjs/cutils.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT cutils.o -MD -MP -MF $(DEPDIR)/cutils.Tpo -c -o cutils.o `test -f 'deps/quickjs/cutils.c' || echo '$(srcdir)/'`deps/quickjs/cutils.c
+	$(am__mv) $(DEPDIR)/cutils.Tpo $(DEPDIR)/cutils.Po
+#	source='deps/quickjs/cutils.c' object='cutils.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o cutils.o `test -f 'deps/quickjs/cutils.c' || echo '$(srcdir)/'`deps/quickjs/cutils.c
+
+cutils.obj: deps/quickjs/cutils.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT cutils.obj -MD -MP -MF $(DEPDIR)/cutils.Tpo -c -o cutils.obj `if test -f 'deps/quickjs/cutils.c'; then $(CYGPATH_W) 'deps/quickjs/cutils.c'; else $(CYGPATH_W) '$(srcdir)/deps/quickjs/cutils.c'; fi`
+	$(am__mv) $(DEPDIR)/cutils.Tpo $(DEPDIR)/cutils.Po
+#	source='deps/quickjs/cutils.c' object='cutils.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o cutils.obj `if test -f 'deps/quickjs/cutils.c'; then $(CYGPATH_W) 'deps/quickjs/cutils.c'; else $(CYGPATH_W) '$(srcdir)/deps/quickjs/cutils.c'; fi`
+
+dtoa.o: deps/quickjs/dtoa.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT dtoa.o -MD -MP -MF $(DEPDIR)/dtoa.Tpo -c -o dtoa.o `test -f 'deps/quickjs/dtoa.c' || echo '$(srcdir)/'`deps/quickjs/dtoa.c
+	$(am__mv) $(DEPDIR)/dtoa.Tpo $(DEPDIR)/dtoa.Po
+#	source='deps/quickjs/dtoa.c' object='dtoa.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o dtoa.o `test -f 'deps/quickjs/dtoa.c' || echo '$(srcdir)/'`deps/quickjs/dtoa.c
+
+dtoa.obj: deps/quickjs/dtoa.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT dtoa.obj -MD -MP -MF $(DEPDIR)/dtoa.Tpo -c -o dtoa.obj `if test -f 'deps/quickjs/dtoa.c'; then $(CYGPATH_W) 'deps/quickjs/dtoa.c'; else $(CYGPATH_W) '$(srcdir)/deps/quickjs/dtoa.c'; fi`
+	$(am__mv) $(DEPDIR)/dtoa.Tpo $(DEPDIR)/dtoa.Po
+#	source='deps/quickjs/dtoa.c' object='dtoa.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o dtoa.obj `if test -f 'deps/quickjs/dtoa.c'; then $(CYGPATH_W) 'deps/quickjs/dtoa.c'; else $(CYGPATH_W) '$(srcdir)/deps/quickjs/dtoa.c'; fi`
+
+libregexp.o: deps/quickjs/libregexp.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libregexp.o -MD -MP -MF $(DEPDIR)/libregexp.Tpo -c -o libregexp.o `test -f 'deps/quickjs/libregexp.c' || echo '$(srcdir)/'`deps/quickjs/libregexp.c
+	$(am__mv) $(DEPDIR)/libregexp.Tpo $(DEPDIR)/libregexp.Po
+#	source='deps/quickjs/libregexp.c' object='libregexp.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libregexp.o `test -f 'deps/quickjs/libregexp.c' || echo '$(srcdir)/'`deps/quickjs/libregexp.c
+
+libregexp.obj: deps/quickjs/libregexp.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libregexp.obj -MD -MP -MF $(DEPDIR)/libregexp.Tpo -c -o libregexp.obj `if test -f 'deps/quickjs/libregexp.c'; then $(CYGPATH_W) 'deps/quickjs/libregexp.c'; else $(CYGPATH_W) '$(srcdir)/deps/quickjs/libregexp.c'; fi`
+	$(am__mv) $(DEPDIR)/libregexp.Tpo $(DEPDIR)/libregexp.Po
+#	source='deps/quickjs/libregexp.c' object='libregexp.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libregexp.obj `if test -f 'deps/quickjs/libregexp.c'; then $(CYGPATH_W) 'deps/quickjs/libregexp.c'; else $(CYGPATH_W) '$(srcdir)/deps/quickjs/libregexp.c'; fi`
+
+libunicode.o: deps/quickjs/libunicode.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libunicode.o -MD -MP -MF $(DEPDIR)/libunicode.Tpo -c -o libunicode.o `test -f 'deps/quickjs/libunicode.c' || echo '$(srcdir)/'`deps/quickjs/libunicode.c
+	$(am__mv) $(DEPDIR)/libunicode.Tpo $(DEPDIR)/libunicode.Po
+#	source='deps/quickjs/libunicode.c' object='libunicode.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libunicode.o `test -f 'deps/quickjs/libunicode.c' || echo '$(srcdir)/'`deps/quickjs/libunicode.c
+
+libunicode.obj: deps/quickjs/libunicode.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libunicode.obj -MD -MP -MF $(DEPDIR)/libunicode.Tpo -c -o libunicode.obj `if test -f 'deps/quickjs/libunicode.c'; then $(CYGPATH_W) 'deps/quickjs/libunicode.c'; else $(CYGPATH_W) '$(srcdir)/deps/quickjs/libunicode.c'; fi`
+	$(am__mv) $(DEPDIR)/libunicode.Tpo $(DEPDIR)/libunicode.Po
+#	source='deps/quickjs/libunicode.c' object='libunicode.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libunicode.obj `if test -f 'deps/quickjs/libunicode.c'; then $(CYGPATH_W) 'deps/quickjs/libunicode.c'; else $(CYGPATH_W) '$(srcdir)/deps/quickjs/libunicode.c'; fi`
 
 .cc.o:
 	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
