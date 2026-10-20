@@ -12,6 +12,31 @@ extern "C" {
 #include "html_common.hh"
 #include "msg.h"
 
+/* console.log binding */
+static JSValue js_console_log(JSContext *ctx, JSValueConst this_val,
+                              int argc, JSValueConst *argv)
+{
+   int i;
+
+   for (i = 0; i < argc; i++) {
+      size_t len;
+      const char *str = JS_ToCStringLen(ctx, &len, argv[i]);
+
+      if (i > 0)
+         fputc(' ', stdout);
+      if (str) {
+         fwrite(str, 1, len, stdout);
+         JS_FreeCString(ctx, str);
+      } else {
+         fputs("[unknown]", stdout);
+      }
+   }
+   fputc('\n', stdout);
+   fflush(stdout);
+
+   return JS_UNDEFINED;
+}
+
 /* document.write binding */
 static JSValue js_document_write(JSContext *ctx, JSValueConst this_val,
                                  int argc, JSValueConst *argv)
@@ -86,10 +111,17 @@ void DilloJS::registerBindings()
       return;
 
    JSValue global_obj = JS_GetGlobalObject(js_context);
+
    JSValue doc_obj = JS_NewObject(js_context);
    JS_SetPropertyStr(js_context, doc_obj, "write",
                      JS_NewCFunction(js_context, js_document_write, "write", 1));
    JS_SetPropertyStr(js_context, global_obj, "document", doc_obj);
+
+   JSValue console_obj = JS_NewObject(js_context);
+   JS_SetPropertyStr(js_context, console_obj, "log",
+                     JS_NewCFunction(js_context, js_console_log, "log", 1));
+   JS_SetPropertyStr(js_context, global_obj, "console", console_obj);
+
    JS_FreeValue(js_context, global_obj);
 }
 
